@@ -1,3 +1,11 @@
+about Aquariums Best Fish Friend:
+interface requires to specify water type and fish tank size. inhbitats are optional:if it is empty, then you only plan to launch your fish tank. if it has values, then it considered you already have some.
+it allows to add image and send question related to it.
+bot will not respond not relevant questions, and approapriate error message is added.
+
+
+
+/*
 # GitHub Codespaces ♥️ React
 
 Welcome to your shiny new Codespace running React! We've got everything fired up and running for you to explore React.
@@ -68,3 +76,4 @@ This section has moved here: [https://vitejs.dev/guide/build.html](https://vitej
 ### Troubleshooting
 
 This section has moved here: [https://vitejs.dev/guide/troubleshooting.html](https://vitejs.dev/guide/troubleshooting.html)
+*/
