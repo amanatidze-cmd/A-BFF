@@ -66,8 +66,8 @@ function App() {
         ]
       };
 
-      const API_KEY = import.meta.env.VITE_API_KEY || '';
-      const GUID = import.meta.env.VITE_GUID || 'ff8f6e97-59ef-42de-b029-6030ae9bd482';
+      const API_KEY = import.meta.env.API_KEY || '';
+      const GUID = import.meta.env.GUID || 'ff8f6e97-59ef-42de-b029-6030ae9bd482';
 
       const headers = {
         'Content-Type': 'application/json',
