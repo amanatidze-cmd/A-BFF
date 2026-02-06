@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 const EXTERNAL_API = 'https://api.airia.ai/v2/PipelineExecution/ff8f6e97-59ef-42de-b029-6030ae9bd482';
-const API_KEY = process.env.VITE_API_KEY || '';
-const GUID = process.env.VITE_GUID || 'ff8f6e97-59ef-42de-b029-6030ae9bd482';
+const API_KEY = process.env.API_KEY || 'ak-MjA2NTc4MjU4MXwxNzcwMTIwNjUyMzU2fHRpLVJHbG5hWFJoYkNCWGIzSnNaQ0JXYVhOcGIyNXpMVTl3Wlc0Z1VtVm5hWE40Y21GMGFXOXVMVkJ5YjJabGMzTnBiMjVoYkE9PXwxfDEwODg3OTIyNTIg';
+const GUID = process.env.GUID || 'ff8f6e97-59ef-42de-b029-6030ae9bd482';
 
 // Proxy endpoint for chat (Vite dev server strips /api prefix)
 app.post('/chat', async (req, res) => {
