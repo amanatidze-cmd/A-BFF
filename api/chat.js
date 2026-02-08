@@ -1,8 +1,13 @@
 import fetch from 'node-fetch';
 
-const EXTERNAL_API = 'https://api.airia.ai/v2/PipelineExecution/ff8f6e97-59ef-42de-b029-6030ae9bd482';
-const API_KEY = process.env.API_KEY || 'ak-MjA2NTc4MjU4MXwxNzcwMTIwNjUyMzU2fHRpLVJHbG5hWFJoYkNCWGIzSnNaQ0JXYVhOcGIyNXpMVTl3Wlc0Z1VtVm5hWE40Y21GMGFXOXVMVkJ5YjJabGMzTnBiMjVoYkE9PXwxfDEwODg3OTIyNTIg';
-const GUID = process.env.GUID || 'ff8f6e97-59ef-42de-b029-6030ae9bd482';
+// Ключ и GUID только из переменных окружения (на Vercel: Project → Settings → Environment Variables).
+// После добавления/изменения переменных нужен redeploy.
+const API_KEY = (process.env.API_KEY || '').trim();
+const GUID = (process.env.GUID || '').trim();
+
+const EXTERNAL_API = GUID
+  ? `https://api.airia.ai/v2/PipelineExecution/${GUID}`
+  : null;
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -23,6 +28,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (!API_KEY || !GUID || !EXTERNAL_API) {
+    console.error('Missing API_KEY or GUID in environment. Set them in Vercel: Project → Settings → Environment Variables, then redeploy.');
+    return res.status(503).json({
+      error: 'Chat service not configured',
+      hint: 'Set API_KEY and GUID in Vercel project environment variables and redeploy.'
+    });
+  }
+
   try {
     const { message, image, metadata, fields } = req.body;
 
@@ -30,13 +43,10 @@ export default async function handler(req, res) {
 
     const headers = {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_KEY}`,
+      'X-API-Key': API_KEY,
+      'X-GUID': GUID,
     };
-    
-    if (API_KEY) {
-      headers['Authorization'] = `Bearer ${API_KEY}`;
-      headers['X-API-Key'] = API_KEY;
-    }
-    headers['X-GUID'] = GUID;
 
     // Sanitize and normalize fields
     const sanitizedFields = Array.isArray(fields)

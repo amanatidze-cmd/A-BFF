@@ -3,6 +3,14 @@ interface requires to specify water type and fish tank size. inhbitats are optio
 it allows to add image and send question related to it.
 bot will not respond not relevant questions, and approapriate error message is added.
 
+### Deploy на Vercel (чат с AI)
+
+1. В [Vercel Dashboard](https://vercel.com/dashboard) → проект → **Settings** → **Environment Variables** добавьте:
+   - `API_KEY` — ключ API Airia (значение из личного кабинета Airia).
+   - `GUID` — идентификатор пайплайна (например `ff8f6e97-59ef-42de-b029-6030ae9bd482`).
+2. **Redeploy** проекта (Deployments → … → Redeploy). Без этого новые переменные не подхватятся.
+3. Ошибка 401 от чата обычно значит: неверный/просроченный `API_KEY` или он не задан в окружении.
+
 
 
 /*
